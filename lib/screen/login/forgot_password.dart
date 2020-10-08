@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 
-class ForgotPassword extends StatefulWidget {
-  @override
-  _ForgotPasswordState createState() => _ForgotPasswordState();
-}
-
-class _ForgotPasswordState extends State<ForgotPassword> {
+class ForgotPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey[900],
       ),
-       resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomPadding: false,
       backgroundColor: Colors.grey[900],
       body: Container(
         decoration: BoxDecoration(

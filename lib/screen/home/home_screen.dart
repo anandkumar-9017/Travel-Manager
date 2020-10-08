@@ -1,21 +1,29 @@
 import 'package:flutter/material.dart';
 
-class Home extends StatefulWidget {
-  @override
-  _HomeState createState() => _HomeState();
-}
 
-class _HomeState extends State<Home> {
+class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.grey[900],
+        centerTitle: true,
+        title: Text(
+          "Travel Manager",
+          style: TextStyle(
+          fontSize:28.0,
+          
+          ),
+        ),
+      ),
+        
       body:Stack(
         fit: StackFit.expand,   
         children: [
           Image.asset(
-            "assets/images/beach.jpeg",
+            "assets/images/homescreen.jpeg",
             fit: BoxFit.fill, 
-          ),
+            ),
         ],
       ), 
       bottomNavigationBar: BottomNavigationBar(
@@ -82,7 +90,8 @@ class _HomeState extends State<Home> {
               ),
           ),
         ], 
-      ),
+        ),
     );
-  }
+  } 
 }
+

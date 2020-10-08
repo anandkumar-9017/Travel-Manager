@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:travelmanager/screen/splash/splashscreen.dart';
-
-
+import 'package:travel_manager/constraint.dart';
+import 'package:travel_manager/screen/splash/splash_screen.dart';
 void main(){
   runApp(MyApp());
 }
@@ -12,7 +11,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "Travel Manager",
       theme: ThemeData(
-        scaffoldBackgroundColor: Colors.grey[900],
+        scaffoldBackgroundColor: mBackgroundColor,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: SplashScreen(),

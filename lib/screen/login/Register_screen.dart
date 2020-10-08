@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:travelmanager/screen/Home_screen.dart';
-import 'package:travelmanager/screen/login/Sign_In.dart';
+import 'package:travel_manager/screen/home/home_screen.dart';
+import 'package:travel_manager/screen/login/LogIn_screen.dart';
 
-class Register extends StatefulWidget {
-  @override
-  _RegisterState createState() => _RegisterState();
-}
-
-class _RegisterState extends State<Register> {
+class Register extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomPadding: false,
       backgroundColor: Colors.grey[900],
       body:Container(
         decoration: BoxDecoration(
@@ -134,7 +129,7 @@ class _RegisterState extends State<Register> {
                         color: Colors.black,
                         onPressed: (){
                           Navigator.push(context, MaterialPageRoute(builder: (context){
-                            return Home();
+                            return HomeScreen();
                           },),);
                         },
                         child: Container(
@@ -155,7 +150,7 @@ class _RegisterState extends State<Register> {
                       FlatButton(
                         onPressed: (){
                           Navigator.push(context, MaterialPageRoute(builder: (context){
-                            return Login();
+                            return LogIN();
                           },),);
                         },
                         child:Text(
