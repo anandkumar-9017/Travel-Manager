@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:travelmanager/screen/Home_screen.dart';
-import 'package:travelmanager/screen/login/Sign_In.dart';
+import 'package:travel_manager/screen/Home_screen.dart';
+import 'package:travel_manager/screen/login/Sign_In.dart';
 
 class Register extends StatefulWidget {
   @override

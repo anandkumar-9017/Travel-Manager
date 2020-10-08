@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:travelmanager/screen/Home_screen.dart';
-import 'package:travelmanager/screen/login/forgot_password.dart';
-import 'package:travelmanager/screen/login/register.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:travel_manager/screen/Home_screen.dart';
+import 'package:travel_manager/screen/login/forgot_password.dart';
+import 'package:travel_manager/screen/login/register.dart';
 
 class Login extends StatefulWidget {
   @override

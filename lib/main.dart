@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:travelmanager/screen/splash/splashscreen.dart';
+import 'package:travel_manager/screen/splash/splashscreen.dart';
+
 
 
 void main(){

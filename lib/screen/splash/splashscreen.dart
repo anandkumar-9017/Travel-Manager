@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:travelmanager/screen/login/Sign_In.dart';
+import 'package:travel_manager/screen/login/Sign_In.dart';
+
 //import 'package:travel_manager/screen/login/LogIn_screen.dart';
 //import 'package:travel_manager/screen/login/Register_screen.dart';
 
