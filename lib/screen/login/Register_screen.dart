@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travel_manager/screen/home/home_screen.dart';
 import 'package:travel_manager/screen/login/LogIn_screen.dart';
 
 class Register extends StatelessWidget {
@@ -34,11 +35,12 @@ class Register extends StatelessWidget {
               SizedBox(height:40.0),
               CircleAvatar(
                 backgroundImage: AssetImage(
-                  'assets/images/logo.jpg',   
+                  'assets/images/tm_logo_small.png',   
                   ),
-                  radius: 45.0,
+                  backgroundColor: Colors.transparent,
+                  radius: 60.0,
               ),
-              SizedBox(height:40.0),
+              SizedBox(height:25.0),
               Text(
                 "Register Yourself Here!",
                 style:TextStyle(
@@ -127,7 +129,7 @@ class Register extends StatelessWidget {
                         color: Colors.black,
                         onPressed: (){
                           Navigator.push(context, MaterialPageRoute(builder: (context){
-                            return Register();
+                            return HomeScreen();
                           },),);
                         },
                         child: Container(

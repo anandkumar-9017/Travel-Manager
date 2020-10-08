@@ -32,10 +32,10 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.grey[800],
         items:[
           BottomNavigationBarItem(
+            
             icon:Icon(
               Icons.home,
               size: 22,
-              
               ),
             title: Text(
               'Home',
@@ -43,7 +43,6 @@ class HomeScreen extends StatelessWidget {
                 fontSize:18.0,
               ),
               ),
-            
           ),
            BottomNavigationBarItem(
             

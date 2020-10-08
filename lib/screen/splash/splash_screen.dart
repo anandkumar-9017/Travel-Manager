@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:travel_manager/screen/home/User_Profile.dart';
+import 'package:travel_manager/screen/login/LogIn_screen.dart';
 import 'package:travel_manager/screen/login/Register_screen.dart';
 
 
@@ -14,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
     var d = Duration(seconds: 3);
     Future.delayed(d,() {
       Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context){
-        return Register();
+        return LogIN();
       }),
        (route) => false, 
       );
@@ -30,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
         fit: StackFit.expand,
         children: [
           Image.asset(
-            'assets/images/splash.png',
+            'assets/images/travelmanager.png',
             fit: BoxFit.fill,
           ),
           Column(

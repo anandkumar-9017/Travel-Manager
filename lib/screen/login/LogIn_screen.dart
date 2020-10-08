@@ -38,11 +38,12 @@ class LogIN extends StatelessWidget {
               SizedBox(height:40.0),
               CircleAvatar(
                 backgroundImage: AssetImage(
-                  'assets/images/logo.jpg',   
+                  'assets/images/tm_logo_small.png',   
                   ),
-                  radius: 45.0,
+                  backgroundColor: Colors.transparent,
+                  radius:60.0,
               ),
-              SizedBox(height:40.0),
+              SizedBox(height:25.0),
               Text(
                 "Welcome To LogIn Page !",
                 style:TextStyle(
