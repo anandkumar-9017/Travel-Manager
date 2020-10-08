@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:travel_manager/screen/home/User_Profile.dart';
-import 'package:travel_manager/screen/login/LogIn_screen.dart';
-import 'package:travel_manager/screen/login/Register_screen.dart';
+import 'package:travelmanager/screen/login/Sign_In.dart';
+//import 'package:travel_manager/screen/login/LogIn_screen.dart';
+//import 'package:travel_manager/screen/login/Register_screen.dart';
 
 
 class SplashScreen extends StatefulWidget {
@@ -16,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
     var d = Duration(seconds: 3);
     Future.delayed(d,() {
       Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context){
-        return LogIN();
+        return Login(); 
       }),
        (route) => false, 
       );
