@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:form_field_validator/form_field_validator.dart';
 import 'package:travel_manager/screen/Home_screen.dart';
 import 'package:travel_manager/screen/login/forgot_password.dart';
 import 'package:travel_manager/screen/login/register.dart';
+
+import 'auth_helper.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -11,23 +12,41 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
 
-  String email;
-  String password;
-  GlobalKey<FormState> formkey= GlobalKey<FormState>();
+  TextEditingController _emailController;
+  TextEditingController _passwordController;
 
-  void login(){
-    if(formkey.currentState.validate()){
-      formkey.currentState.save();
-      signin(email,password,context).then((value){
-      if(value!= null){
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context)=>Home(),)
-        );     
-      }
-      });
-          }
+  @override
+  void initState() {
+    super.initState();
+    _emailController = TextEditingController(text: "");
+    _passwordController = TextEditingController(text: "");
+  }
+
+  showError(String errormessage) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+
+            title: Text('ERROR'),
+            content: Text(errormessage),
+
+            actions: <Widget>[
+              FlatButton(
+
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+
+
+                  child: Text('OK'))
+            ],
+          );
         }
+    );
+  }
+
+
         @override
         Widget build(BuildContext context) {
           return Scaffold(
@@ -85,7 +104,6 @@ class _LoginState extends State<Login> {
                         ),
                         
                         child: Form(
-                          key: formkey,
                             child: Column(
                             
                             children: [
@@ -93,6 +111,7 @@ class _LoginState extends State<Login> {
                               Padding(
                                 padding: const EdgeInsets.all(15.0),
                                 child: TextFormField(
+                                  controller:_emailController,
                                   cursorColor: Colors.red,
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(
@@ -106,24 +125,15 @@ class _LoginState extends State<Login> {
                                     labelText: 'Email Id',
                                     hintText:'Enter your email i\'d'
                                   ),
-                                  validator: MultiValidator(
-                                    [
-                                      RequiredValidator(errorText: 'This Field is Required'),
-                                      EmailValidator(errorText: 'Invalid Email Address')
-                                    ],
                                   ),
-                                  onChanged: (val){
-                                    email=val;
-                                  },
                                 ),
-                              ),
-                            
                               Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 15),
                                 child: TextFormField(
+                                  controller: _passwordController,
                                   cursorColor: Colors.red,
                                   decoration: InputDecoration(
-                                    
+
                                     border: OutlineInputBorder(
                                       borderSide:BorderSide(color:Colors.red),
                                       borderRadius: BorderRadius.all(Radius.circular(20.0)),  
@@ -135,17 +145,8 @@ class _LoginState extends State<Login> {
                                     labelText: 'Password',
                                     hintText:'Enter your password',
                                   ),
-                                  validator: MultiValidator(
-                                    [
-                                      RequiredValidator(errorText: 'Password Is Required'),
-                                      MinLengthValidator(6, errorText: 'Minimum 6 Character'),
-                                    ],
-                                  ),
-                                  onChanged: (val){
-                                    password=val;
-                                  },
                                 ),
-                              ),
+                                ),
                               FlatButton(
                                 onPressed: (){
                                   Navigator.push(context, MaterialPageRoute(builder: (context){
@@ -167,11 +168,29 @@ class _LoginState extends State<Login> {
                                   borderRadius:BorderRadius.circular(36),
                                 ),
                                 color: Colors.black,
-                                onPressed: (){
-                                  Navigator.push(context, MaterialPageRoute(builder: (context){
-                                    return Home();
-                                  },),);
-                                },
+                                  onPressed: () async {
+                                    if (_emailController.text.isEmpty ||
+                                        _passwordController.text.isEmpty) {
+                                      print("Email and password cannot be empty");
+                                      showError('Email and Password cannot be empty');
+                                      return ;
+                                    }
+                                    if (!_emailController.text.contains("@")||!_emailController.text.contains(".")) {
+                                      showError('Enter a valid email');
+                                      return ;
+                                    }
+                                    try {
+                                      final user = await AuthHelper.signInWithEmail(
+                                          email: _emailController.text,
+                                          password: _passwordController.text);
+                                      if (user != null) {
+                                        print("login successful");
+                                        Navigator.push(context, MaterialPageRoute(builder: (context){return Home();},),);
+                                      }
+                                    } catch (e) {
+                                      print(e);
+                                    }
+                                  },
                                 child: Container(
                                 padding: const EdgeInsets.symmetric(vertical:16),
                                 alignment: Alignment.center,
@@ -213,6 +232,6 @@ class _LoginState extends State<Login> {
             ),
           );
         }
-      
+
         signin(String email, String password, BuildContext context) {}
 }

@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import 'Sign_In.dart';
 
 class ForgotPassword extends StatefulWidget {
   @override
@@ -6,6 +9,34 @@ class ForgotPassword extends StatefulWidget {
 }
 
 class _ForgotPasswordState extends State<ForgotPassword> {
+
+  final editController = TextEditingController();
+
+
+  showError(String errormessage) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+
+            title: Text('ERROR'),
+            content: Text(errormessage),
+
+            actions: <Widget>[
+              FlatButton(
+
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+
+
+                  child: Text('OK'))
+            ],
+          );
+        }
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,6 +101,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     Padding(
                       padding: const EdgeInsets.all(15.0),
                         child: TextField(
+                          controller: editController,
                           cursorColor: Colors.red,
                           decoration: InputDecoration(                    
                             border: OutlineInputBorder(
@@ -93,8 +125,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           borderRadius:BorderRadius.circular(36),
                         ),
                         color: Colors.black,
-                        onPressed: (){
-                        },
+                          onPressed: () {
+                            resetPassword(context);
+                          },
                         child: Container(
                         padding: const EdgeInsets.symmetric(vertical:16,),
                         alignment: Alignment.center,
@@ -122,5 +155,15 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         ),
       ),
     );
+  }
+  void resetPassword(BuildContext context) async {
+    if (editController.text.length == 0 || !editController.text.contains("@")) {
+      showError('Enter valid email');
+      return;
+    }
+    await FirebaseAuth.instance.sendPasswordResetEmail(email: editController.text);
+    showError('Reset password link has sent your mail please use it to change the password');
+    Navigator.push(context, MaterialPageRoute(builder: (context){return Login();},),);
+    Navigator.pop(context);
   }
 }
