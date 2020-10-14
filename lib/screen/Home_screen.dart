@@ -103,7 +103,7 @@ class _HomeState extends State<Home> {
                 ),
                 Expanded(
                   child: custombutton(Icon(
-                    Icons.museum,
+                    Icons.musium,
                     size: 30.0,
                   )),
                 ),
