@@ -29,7 +29,7 @@ class _HomeState extends State<Home> {
           children: [
             Stack(
               children: [
-                Image.asset('asset/images/map.jpeg'),
+                Image.asset('assets/images/map.jpeg'),
                 Positioned(
                   child: Icon(
                     Icons.search,
