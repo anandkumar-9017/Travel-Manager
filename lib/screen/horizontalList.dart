@@ -34,7 +34,7 @@ class _HorizontalListState extends State<HorizontalList> {
       child: Column(
         children: [
           Image.asset(
-            'asset/images/lucknow_image.jpg',
+            'assets/images/lucknow_image.jpg',
             height: 100,
             width: 150,
           ),
