@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:Travel-Manager/horizontalList.dart';
+import 'package:travel_manager/screen/Forum_screen.dart';
+import 'package:travel_manager/screen/Profile_screen.dart';
+import 'package:travel_manager/screen/Trip_screen.dart';
+import 'package:travel_manager/screen/bootom_nav.dart';
+
+import 'package:travel_manager/screen/horizontalList.dart';
 
 
 
@@ -99,36 +104,42 @@ class _HomeState extends State<Home> {
                   child: custombutton(Icon(
                     Icons.assignment,
                     size: 30.0,
-                  )),
-                ),
-                Expanded(
-                  child: custombutton(Icon(
-                    Icons.musium,
-                    size: 30.0,
+                    color: Colors.white,
                   )),
                 ),
                 Expanded(
                   child: custombutton(Icon(
                     Icons.hotel,
                     size: 30.0,
+                    color: Colors.white,
+                  )),
+                ),
+                Expanded(
+                  child: custombutton(Icon(
+                    Icons.hotel,
+                    size: 30.0,
+                    color: Colors.white,
                   )),
                 ),
                 Expanded(
                   child: custombutton(Icon(
                     Icons.restaurant,
                     size: 30.0,
+                    color: Colors.white,
                   )),
                 ),
                 Expanded(
                   child: custombutton(Icon(
-                    Icons.shopping_bag,
+                    Icons.shop,
                     size: 30.0,
+                    color: Colors.white,
                   )),
                 ),
                 Expanded(
                   child: custombutton(Icon(
                     Icons.train,
                     size: 30.0,
+                    color: Colors.white,
                   )),
                 ),
               ],
@@ -142,17 +153,20 @@ class _HomeState extends State<Home> {
                     "Places to Visit",
                     style: TextStyle(
                       fontSize: 22.0,
+                      color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   FlatButton(
-                      onPressed: () {},
-                      child: Text("See All",
-                          style: TextStyle(
-                            color: Colors.green,
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.w600,
-                          )))
+                    onPressed: () {},
+                    child: Text("See All",
+                      style: TextStyle(
+                        color: Colors.green,
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -166,17 +180,20 @@ class _HomeState extends State<Home> {
                     "Hotels",
                     style: TextStyle(
                       fontSize: 22.0,
+                      color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   FlatButton(
                       onPressed: () {},
                       child: Text("See All",
-                          style: TextStyle(
-                            color: Colors.green,
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.w600,
-                          )))
+                        style: TextStyle(
+                          color: Colors.green,
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                  ),
                 ],
               ),
             ),
@@ -190,6 +207,7 @@ class _HomeState extends State<Home> {
                     "Restaurents",
                     style: TextStyle(
                       fontSize: 22.0,
+                      color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -211,20 +229,23 @@ class _HomeState extends State<Home> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Shopping Location",
+                    "Shopping Malls",
                     style: TextStyle(
                       fontSize: 22.0,
+                      color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   FlatButton(
-                      onPressed: () {},
-                      child: Text("See All",
-                          style: TextStyle(
-                            color: Colors.green,
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.w600,
-                          )))
+                  onPressed: () {},
+                  child: Text("See All",
+                      style: TextStyle(
+                        color: Colors.green,
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -238,17 +259,20 @@ class _HomeState extends State<Home> {
                     "Transport",
                     style: TextStyle(
                       fontSize: 22.0,
+                      color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   FlatButton(
-                      onPressed: () {},
-                      child: Text("See All",
-                          style: TextStyle(
-                            color: Colors.green,
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.w600,
-                          )))
+                    onPressed: () {},
+                    child: Text("See All",
+                      style: TextStyle(
+                        color: Colors.green,
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -256,72 +280,7 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        child: Row(
-          children: [
-            Expanded(
-              child: SizedBox(
-                height: 60.0,
-                child: InkWell(
-                  onTap: () {},
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.home),
-                      Text("Home"),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-              child: SizedBox(
-                height: 60.0,
-                child: InkWell(
-                  onTap: () {},
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.tour),
-                      Text("Trip"),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-              child: SizedBox(
-                height: 60.0,
-                child: InkWell(
-                  onTap: () {},
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.message),
-                      Text("Forum"),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-              child: SizedBox(
-                height: 60.0,
-                child: InkWell(
-                  onTap: () {},
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.person),
-                      Text("Profile"),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+      bottomNavigationBar:BottomNav(),
     );
   }
 }
