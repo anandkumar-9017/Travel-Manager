@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:travel_manager/screen/login/Sign_In.dart';
 
 
 class AuthHelper {
@@ -13,9 +14,13 @@ class AuthHelper {
 
   static signupWithEmail({String email, String password}) async {
     final res = await _auth.createUserWithEmailAndPassword(
-        email: email, password: password);
+     email: email, password: password);
     final User user = res.user;
     return user;
+  }
+  static signOut() {
+    
+    return _auth.signOut();
   }
 
 }
