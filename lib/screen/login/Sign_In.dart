@@ -60,7 +60,7 @@ class _LoginState extends State<Login> {
               ),
               Center(
                 child: Text(
-                  "Travel Manager ",
+                  "Travel Mania",
                   style: TextStyle(
                     fontSize: 40.0,
                     color: Colors.white,

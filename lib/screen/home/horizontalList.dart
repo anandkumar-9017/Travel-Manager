@@ -33,10 +33,13 @@ class _HorizontalListState extends State<HorizontalList> {
       ),
       child: Column(
         children: [
-          Image.asset(
-            'assets/images/lucknow_image.jpg',
-            height: 100,
-            width: 150,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4),
+            child: Image.asset(
+              'assets/images/lucknow_image.jpg',
+              height: 100,
+              width: 150,
+            ),
           ),
           Text("Hotel1"),
           starrow(),

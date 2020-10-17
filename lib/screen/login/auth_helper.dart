@@ -18,9 +18,9 @@ class AuthHelper {
     final User user = res.user;
     return user;
   }
-  static signOut() {
+  static logOut() {
     
-    return _auth.signOut();
+    return  _auth.signOut(); 
   }
 
 }

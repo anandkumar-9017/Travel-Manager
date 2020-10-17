@@ -1,10 +1,5 @@
-<<<<<<< HEAD
- import 'package:flutter/material.dart';
-import 'package:travel_manager/screen/Home_screen.dart';
-=======
 import 'package:flutter/material.dart';
 import 'package:travel_manager/screen/home/Home_screen.dart';
->>>>>>> 57ffd4d7e30001aade4b90dd2a3e3c0b98e011d6
 import 'package:travel_manager/screen/login/Sign_In.dart';
 
 import 'auth_helper.dart';
@@ -58,7 +53,7 @@ class _RegisterState extends State<Register> {
               ),
               Center(
                 child: Text(
-                  "Travel Manager ",
+                  "Travel Mania ",
                   style: TextStyle(
                     fontSize: 40.0,
                     color: Colors.white,

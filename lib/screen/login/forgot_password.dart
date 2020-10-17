@@ -43,7 +43,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       appBar: AppBar(
         backgroundColor: Colors.grey[900],
       ),
-       resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomPadding: false,
       backgroundColor: Colors.grey[900],
       body: Container(
         decoration: BoxDecoration(

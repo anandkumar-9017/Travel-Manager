@@ -21,7 +21,7 @@ class IconBar extends StatelessWidget {
         ),
         Expanded(
           child: custombutton(Icon(
-            Icons.museum,
+            Icons.motorcycle,
             size: 30.0,
           )),
         ),
@@ -39,7 +39,7 @@ class IconBar extends StatelessWidget {
         ),
         Expanded(
           child: custombutton(Icon(
-            Icons.shopping_bag,
+            Icons.business_center,
             size: 30.0,
           )),
         ),
