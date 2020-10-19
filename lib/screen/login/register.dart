@@ -33,7 +33,7 @@ class _RegisterState extends State<Register> {
   }
 
   @override
-   Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       backgroundColor: Colors.grey[900],

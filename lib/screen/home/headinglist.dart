@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travel_manager/screen/home/seemore.dart';
 
 class HeadingList extends StatelessWidget {
   String heading;
@@ -19,7 +20,16 @@ class HeadingList extends StatelessWidget {
             ),
           ),
           FlatButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return SeeMore(name: "$heading");
+                    },
+                  ),
+                );
+              },
               child: Text("See All",
                   style: TextStyle(
                     color: Colors.green,

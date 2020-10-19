@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travel_manager/screen/home/placeprofile.dart';
 
 class HorizontalList extends StatefulWidget {
   @override
@@ -17,33 +18,45 @@ class _HorizontalListState extends State<HorizontalList> {
   }
 
   Widget customlist() {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 5),
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey,
-            offset: Offset(0.0, 1.0), //(x,y)
-            blurRadius: 6.0,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return PlaceProfile();
+            },
           ),
-        ],
-        color: Colors.white,
-        shape: BoxShape.rectangle,
-        borderRadius: BorderRadius.circular(5),
-      ),
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4),
-            child: Image.asset(
-              'assets/images/lucknow_image.jpg',
-              height: 100,
-              width: 150,
+        );
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 5),
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey,
+              offset: Offset(0.0, 1.0), //(x,y)
+              blurRadius: 6.0,
             ),
-          ),
-          Text("Hotel1"),
-          starrow(),
-        ],
+          ],
+          color: Colors.white,
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4),
+              child: Image.asset(
+                'assets/images/lucknow_image.jpg',
+                height: 100,
+                width: 150,
+              ),
+            ),
+            Text("Hotel1"),
+            starrow(),
+          ],
+        ),
       ),
     );
   }

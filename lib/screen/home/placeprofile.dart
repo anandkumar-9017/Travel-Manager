@@ -7,34 +7,80 @@ class PlaceProfile extends StatefulWidget {
 }
 
 class _PlaceProfileState extends State<PlaceProfile> {
-  Widget starrow() {
+  Widget review() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Padding(
+              padding: EdgeInsets.all(10.0),
+              child: CircleAvatar(
+                child: Text(
+                  "P",
+                  style: TextStyle(color: Colors.white, fontSize: 15.0),
+                ),
+                backgroundColor: Colors.brown,
+              ),
+            ),
+            SizedBox(
+              width: 10.0,
+            ),
+            Text(
+              "Prashant",
+              style: TextStyle(fontSize: 20.0),
+            ),
+          ],
+        ),
+        Row(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 0.0),
+              child: starrow(MainAxisAlignment.start, 16.5),
+            ),
+            Text("27/10/2020"),
+          ],
+        ),
+        Padding(
+          padding: EdgeInsets.all(15.0),
+          child: Text(
+              "The hotel was fantastic offered lot of facilties but the food was not up to mark but since i loved to eat outside therefore I didn't faced much problem."),
+        ),
+        SizedBox(
+          height: 50.0,
+        ),
+      ],
+    );
+  }
+
+  Widget starrow(MainAxisAlignment align, double size) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: align,
       children: [
         Icon(
           Icons.star,
           color: Colors.green,
-          size: 12.0,
+          size: size,
         ),
         Icon(
           Icons.star,
           color: Colors.green,
-          size: 12.0,
+          size: size,
         ),
         Icon(
           Icons.star,
           color: Colors.green,
-          size: 12.0,
+          size: size,
         ),
         Icon(
           Icons.star,
           color: Colors.grey,
-          size: 12.0,
+          size: size,
         ),
         Icon(
           Icons.star,
           color: Colors.grey,
-          size: 12.0,
+          size: size,
         ),
       ],
     );
@@ -48,7 +94,7 @@ class _PlaceProfileState extends State<PlaceProfile> {
         children: [
           Stack(
             children: [
-              Image.asset('asset/images/lucknow_image.jpg'),
+              Image.asset('assets/images/lucknow_image.jpg'),
               Positioned(
                 child: IconButton(
                   onPressed: () {
@@ -183,10 +229,14 @@ class _PlaceProfileState extends State<PlaceProfile> {
                       Text("3",
                           style: TextStyle(
                               fontSize: 55.0, fontWeight: FontWeight.w300)),
-                      starrow(),
+                      starrow(MainAxisAlignment.center, 12.0),
                       Text("35 reviews")
                     ],
-                  )
+                  ),
+                  review(),
+                  review(),
+                  review(),
+                  review(),
                 ],
               ),
             ),
