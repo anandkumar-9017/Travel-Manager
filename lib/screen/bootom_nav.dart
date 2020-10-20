@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travel_manager/screen/Forum_screen.dart';
 import 'package:travel_manager/screen/home/Home_screen.dart';
-import 'package:travel_manager/screen/Profile_screen.dart';
+import 'package:travel_manager/screen/profile/Profile_screen.dart';
 import 'package:travel_manager/screen/Trip_screen.dart';
 
 class BottomNav extends StatefulWidget {
