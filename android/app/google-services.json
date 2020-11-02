@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "701757726926",
-    "firebase_url": "https://fir-authenticatoin-7dbc6.firebaseio.com",
-    "project_id": "fir-authenticatoin-7dbc6",
-    "storage_bucket": "fir-authenticatoin-7dbc6.appspot.com"
+    "project_number": "642258565948",
+    "firebase_url": "https://tripmania-a1fae.firebaseio.com",
+    "project_id": "tripmania-a1fae",
+    "storage_bucket": "tripmania-a1fae.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:701757726926:android:fc379c71b6935ca99c309f",
+        "mobilesdk_app_id": "1:642258565948:android:58f126c40a35c18d9efc39",
         "android_client_info": {
           "package_name": "com.example.travel_manager"
         }
       },
       "oauth_client": [
         {
-          "client_id": "701757726926-9huakrdlffrl3dvbhnc6r8cl8m5fej4c.apps.googleusercontent.com",
+          "client_id": "642258565948-51taaf2j9cct9rf7eirnrorteggnh69o.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDd62DIoJySQa13LgYvLlWdP37bwlmNP_Q"
+          "current_key": "AIzaSyC_sZcsODqvsorEjlsIgGczjiD8ZdKbBxM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "701757726926-9huakrdlffrl3dvbhnc6r8cl8m5fej4c.apps.googleusercontent.com",
+              "client_id": "642258565948-51taaf2j9cct9rf7eirnrorteggnh69o.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -1,17 +1,61 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:travel_manager/screen/home/placesdetails.dart';
 
-class SeeMore extends StatefulWidget {
+class SeeMoreShopes extends StatefulWidget {
   final String name;
-  SeeMore({this.name});
+
+  SeeMoreShopes({this.name});
 
   @override
-  _SeeMoreState createState() => _SeeMoreState(name: name);
+  _SeeMoreShopesState createState() => _SeeMoreShopesState(name);
 }
 
-class _SeeMoreState extends State<SeeMore> {
+class _SeeMoreShopesState extends State<SeeMoreShopes> {
   String name;
-  _SeeMoreState({this.name});
+  QuerySnapshot hotels;
+  var i = 3;
+
+  _SeeMoreShopesState(name) {
+    this.name = name;
+  }
+
+  Widget funct1() {
+    if (hotels != null)
+      return ListView.builder(
+        itemCount: hotels.docs.length,
+        itemBuilder: (context, int index) {
+          return PlacesDetails(
+              name,
+              hotels.docs[index].data()['key'],
+              hotels.docs[index].data()['name'],
+              hotels.docs[index].data()['pricing'],
+              hotels.docs[index].data()['speciality'],
+              hotels.docs[index].data()['imagelink']);
+        },
+      );
+    else
+      return Text('aa raha hai');
+  }
+
+  void funct() async {
+    hotels = await FirebaseFirestore.instance
+        .collection("fetch details")
+        .doc("Allahabad")
+        .collection('Shopping Places')
+        .get();
+
+    setState(() {
+      hotels = hotels;
+    });
+  }
+
+  @override
+  void initState() {
+    funct();
+    super.initState();
+  }
+
   int press = 0;
 
   Widget icons() {
@@ -74,16 +118,8 @@ class _SeeMoreState extends State<SeeMore> {
         ],
       ),
       body: Container(
-          child: ListView(
-        children: [
-          PlacesDetails(),
-          PlacesDetails(),
-          PlacesDetails(),
-          PlacesDetails(),
-          PlacesDetails(),
-          PlacesDetails()
-        ],
-      )),
+        child: funct1(),
+      ),
     );
   }
 }

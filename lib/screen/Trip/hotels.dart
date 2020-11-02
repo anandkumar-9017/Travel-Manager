@@ -1,31 +1,66 @@
 import 'package:flutter/material.dart';
 import 'package:travel_manager/screen/Trip/editableDetails.dart';
+import 'package:travel_manager/screen/Trip/hotels/hotelprofile.dart';
+import 'package:travel_manager/screen/Trip/hotels/seehotels.dart';
 
 class HotelList extends StatefulWidget {
   var i;
-  HotelList({this.i});
+  var name;
+  var checkin;
+  var checkout;
+  var room;
+  var tripname;
+  var keydata;
+  HotelList(
+      {this.i,
+      this.name,
+      this.checkin,
+      this.checkout,
+      this.room,
+      this.keydata,
+      this.tripname});
 
   @override
-  _HotelListState createState() => _HotelListState(i);
+  _HotelListState createState() =>
+      _HotelListState(i, name, checkin, checkout, room, keydata, tripname);
 }
 
 class _HotelListState extends State<HotelList> {
   var i;
-  _HotelListState(var i) {
+  var name;
+  var checkin;
+  var checkout;
+  var room;
+  var keydata;
+  var tripname;
+  List<String> detailtransfer = List();
+  List<Icon> icontransfer = List();
+  _HotelListState(var i, var name, var checkin, var checkout, var room,
+      var keydata, var tripname) {
     this.i = i;
+    this.name = name;
+    this.checkout = checkout;
+    this.checkin = checkin;
+    this.room = room;
+    this.keydata = keydata;
+    this.tripname = tripname;
+    function();
   }
-  List<String> detailtransfer = <String>[
-    '25-Oct 2020',
-    '30-Oct 2020',
-    'Cannought Place, Delhi',
-    '2 Dulex luxury room',
-  ];
-  List<Icon> icontransfer = <Icon>[
-    Icon(Icons.date_range),
-    Icon(Icons.calendar_today),
-    Icon(Icons.location_city),
-    Icon(Icons.room),
-  ];
+  void function() {
+    detailtransfer = <String>[
+      checkin,
+      checkout,
+      name,
+      room,
+    ];
+    icontransfer = <Icon>[
+      Icon(Icons.date_range),
+      Icon(Icons.calendar_today),
+      Icon(Icons.location_city),
+      Icon(Icons.room),
+    ];
+  }
+
   Widget details(Widget icon, String text) {
     return Padding(
       padding: EdgeInsets.only(top: 5.0, left: 25.0),
@@ -45,11 +80,12 @@ class _HotelListState extends State<HotelList> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        print(keydata);
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) {
-              return EditableDetails(detailtransfer, icontransfer);
+              return HotelProfile(keydata, tripname);
             },
           ),
         );
@@ -88,11 +124,10 @@ class _HotelListState extends State<HotelList> {
                   child: Container(
                     child: Column(
                       children: [
-                        details(Icon(Icons.date_range), "25-Oct 2020"),
-                        details(Icon(Icons.calendar_today), "30-Oct 2020"),
-                        details(Icon(Icons.location_city),
-                            "Cannought Place, Delhi"),
-                        details(Icon(Icons.room), "2 Dulex luxury room"),
+                        details(Icon(Icons.date_range), checkin),
+                        details(Icon(Icons.calendar_today), checkout),
+                        details(Icon(Icons.location_city), name),
+                        details(Icon(Icons.room), room),
                       ],
                     ),
                   ),

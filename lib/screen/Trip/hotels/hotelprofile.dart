@@ -1,15 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:travel_manager/screen/Trip/TripProfile.dart';
 
 import 'package:travel_manager/screen/home/seemorehotel.dart';
 
-class PlaceProfile extends StatefulWidget {
+class HotelProfile extends StatefulWidget {
+  var keydata;
+  var tripname;
+  HotelProfile(var keydata, var tripname) {
+    this.keydata = keydata;
+    this.tripname = tripname;
+  }
   @override
-  _PlacesProfileState createState() => _PlacesProfileState();
+  _HotelProfileState createState() => _HotelProfileState(keydata, tripname);
 }
 
-class _PlacesProfileState extends State<PlaceProfile> {
+class _HotelProfileState extends State<HotelProfile> {
   var keydata;
   var tripname;
   var about;
@@ -24,25 +31,133 @@ class _PlacesProfileState extends State<PlaceProfile> {
   var room;
   int load = 0;
   int r = 0, done = 0;
+  TextEditingController _fromdate = TextEditingController(text: "");
+  TextEditingController _todate = TextEditingController(text: "");
+  TextEditingController _room = TextEditingController(text: "");
 
-  var city;
+  _HotelProfileState(var keydata, var tripname) {
+    this.keydata = keydata;
+    this.tripname = tripname;
+  }
+
+  var hotels;
   @override
   void initState() {
     funct();
     super.initState();
   }
 
+  _showDialog() async {
+    await showDialog<String>(
+      context: context,
+      child: new AlertDialog(
+        contentPadding: const EdgeInsets.all(16.0),
+        content: new Column(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 5),
+              child: new TextField(
+                controller: _fromdate,
+                autofocus: true,
+                decoration: new InputDecoration(
+                    labelText: 'Checkin date', hintText: 'dd/mm/yyyy'),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 5),
+              child: new TextField(
+                controller: _todate,
+                autofocus: true,
+                decoration: new InputDecoration(
+                    labelText: 'Checkout date', hintText: 'dd/mm/yyyy'),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 5),
+              child: new TextField(
+                controller: _room,
+                autofocus: true,
+                decoration:
+                    new InputDecoration(labelText: 'Room', hintText: 'room'),
+              ),
+            ),
+          ],
+        ),
+        actions: <Widget>[
+          new FlatButton(
+              child: const Text('CANCEL'),
+              onPressed: () {
+                Navigator.of(context, rootNavigator: true).pop();
+                return;
+              }),
+          new FlatButton(
+              child: const Text('SAVE'),
+              onPressed: () async {
+                var room = _room.text;
+                var checkin = _fromdate.text;
+                var checkout = _todate.text;
+                var firebaseUser = FirebaseAuth.instance.currentUser;
+                await FirebaseFirestore.instance
+                    .collection("users")
+                    .doc(firebaseUser.uid)
+                    .collection("trips")
+                    .doc(tripname)
+                    .collection("hotel")
+                    .doc(keydata)
+                    .set({
+                  "checkin": checkin,
+                  "checkout": checkout,
+                  "room": room,
+                  "name": name,
+                  "key": keydata,
+                }).then((_) {
+                  loaddata();
+                  print("likh gaya");
+                  setState(() {
+                    r = 1;
+                  });
+
+                  Navigator.of(context, rootNavigator: true).pop();
+                });
+              })
+        ],
+      ),
+    );
+  }
+
+  void loaddata() async {
+    var firebaseUser = FirebaseAuth.instance.currentUser;
+    var detailprint = await FirebaseFirestore.instance
+        .collection("users")
+        .doc(firebaseUser.uid)
+        .collection("trips")
+        .doc(tripname)
+        .collection("hotel")
+        .doc(keydata)
+        .get();
+    fromdate = detailprint.data()["checkin"];
+    todate = detailprint.data()["checkout"];
+    room = detailprint.data()["room"];
+    print("ho gaya");
+    setState(() {
+      done = 1;
+    });
+  }
+
   void funct() async {
-    city = await FirebaseFirestore.instance
+    hotels = await FirebaseFirestore.instance
         .collection("fetch details")
         .doc("Allahabad")
+        .collection('Hotels')
+        .doc(keydata)
         .get();
-    about = city.data()["About"];
-
-    rating = "4.5";
-    name = "Allahabad";
-    link = city.data()["link"];
-    imagelink = city.data()["imagelink"];
+    about = hotels.data()["About"];
+    price = hotels.data()["price"];
+    location = hotels.data()["location"];
+    rating = hotels.data()["rating"];
+    name = hotels.data()["name"];
+    link = hotels.data()["link"];
+    imagelink = hotels.data()["imagelink"];
 
     setState(() {
       load = 1;
@@ -128,6 +243,67 @@ class _PlacesProfileState extends State<PlaceProfile> {
     );
   }
 
+  Widget bookingdetails() {
+    if (done == 0)
+      return SizedBox(
+        height: 0.1,
+      );
+    else {
+      return Padding(
+        padding: EdgeInsets.all(10.0),
+        child: Container(
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey,
+                offset: Offset(0.0, 1.0), //(x,y)
+                blurRadius: 6.0,
+              ),
+            ],
+            color: Colors.white,
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.all(15.0),
+                child: Text("checkin",
+                    style:
+                        TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500)),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 15.0, right: 15.0, bottom: 15.0),
+                child: Text(fromdate),
+              ),
+              Padding(
+                padding: EdgeInsets.all(15.0),
+                child: Text("checkout",
+                    style:
+                        TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500)),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 15.0, right: 15.0, bottom: 15.0),
+                child: Text(todate),
+              ),
+              Padding(
+                padding: EdgeInsets.all(15.0),
+                child: Text("room",
+                    style:
+                        TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500)),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 15.0, right: 15.0, bottom: 15.0),
+                child: Text(room),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+  }
+
   Widget content() {
     return Scaffold(
       body: Container(
@@ -176,6 +352,7 @@ class _PlacesProfileState extends State<PlaceProfile> {
           SizedBox(
             height: 15.0,
           ),
+          bookingdetails(),
           Padding(
             padding: EdgeInsets.all(10.0),
             child: Container(
@@ -231,6 +408,17 @@ class _PlacesProfileState extends State<PlaceProfile> {
                 children: [
                   Padding(
                     padding: EdgeInsets.all(15.0),
+                    child: Text("Price",
+                        style: TextStyle(
+                            fontSize: 20.0, fontWeight: FontWeight.w500)),
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsets.only(left: 15.0, right: 15.0, bottom: 15.0),
+                    child: Text(price),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(15.0),
                     child: Text("link",
                         style: TextStyle(
                             fontSize: 20.0, fontWeight: FontWeight.w500)),
@@ -239,6 +427,17 @@ class _PlacesProfileState extends State<PlaceProfile> {
                     padding:
                         EdgeInsets.only(left: 15.0, right: 15.0, bottom: 15.0),
                     child: Text(link),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(15.0),
+                    child: Text("Location",
+                        style: TextStyle(
+                            fontSize: 20.0, fontWeight: FontWeight.w500)),
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsets.only(left: 15.0, right: 15.0, bottom: 15.0),
+                    child: Text(location),
                   ),
                 ],
               ),
@@ -288,14 +487,33 @@ class _PlacesProfileState extends State<PlaceProfile> {
           ),
         ],
       )),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          print(r);
+          _showDialog();
+          if (r == 1) print("ho gaya");
+        },
+        child: Icon(Icons.send),
+        backgroundColor: Colors.black,
+      ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    if (load == 1)
+    if ((load == 0) && (r == 0) && (done == 0))
+      return Scaffold(
+          appBar: AppBar(title: Text('Loading')), body: Text("Loading..."));
+    else if ((load == 1) && (r == 0) && (done == 0))
       return content();
-    else
-      return Scaffold(body: Text('loading....'));
+    else if ((load == 1) && (r == 1) && (done == 0))
+      return Scaffold(
+          appBar: AppBar(title: Text('Loading')), body: Text("Loading..."));
+    else if ((load == 1) && (r == 1) && (done == 1))
+      return content();
+    else {
+      return Scaffold(
+          appBar: AppBar(title: Text('Error')), body: Text("Error Occured"));
+    }
   }
 }

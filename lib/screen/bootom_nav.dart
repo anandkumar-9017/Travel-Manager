@@ -20,8 +20,7 @@ class _BottomNavState extends State<BottomNav> {
               height: 60.0,
               child: InkWell(
                 onTap: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => Home()));
+                  Navigator.of(context).pop();
                 },
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,

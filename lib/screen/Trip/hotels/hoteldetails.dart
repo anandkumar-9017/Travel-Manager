@@ -1,52 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:travel_manager/screen/Trip/TripProfile.dart';
+import 'package:travel_manager/screen/Trip/hotels/hotelprofile.dart';
+import 'package:travel_manager/screen/home/placeprofile.dart';
 
-class ListTrip extends StatefulWidget {
-  var name;
-  var fromdate;
-  var todate;
-  var tocity;
-
-  var i;
-  ListTrip({
-    this.i,
-    this.name,
-    this.fromdate,
-    this.todate,
-    this.tocity,
-  });
-
+class HotelDetails extends StatefulWidget {
+  var keydata;
+  String placename;
+  String location;
+  String rating;
+  String image;
+  var tripname;
+  HotelDetails(var keydata, String placename, String rating, String location,
+      String image, var tripname) {
+    this.keydata = keydata;
+    this.placename = placename;
+    this.rating = rating;
+    this.image = image;
+    this.location = location;
+    this.tripname = tripname;
+  }
   @override
-  _ListTripState createState() => _ListTripState(
-        i,
-        name,
-        fromdate,
-        todate,
-        tocity,
-      );
+  _HotelDetailsState createState() =>
+      _HotelDetailsState(keydata, placename, rating, image, location, tripname);
 }
 
-class _ListTripState extends State<ListTrip> {
-  var i;
-  var name;
-  var fromdate;
-  var todate;
-  var tocity;
-
-  _ListTripState(
-    var i,
-    var name,
-    var fromdate,
-    var todate,
-    var tocity,
-  ) {
-    this.i = i;
-    this.name = name;
-    this.fromdate = fromdate;
-    this.todate = todate;
-    this.tocity = tocity;
+class _HotelDetailsState extends State<HotelDetails> {
+  var keydata;
+  String placename;
+  String location;
+  String rating;
+  String image;
+  var tripname;
+  _HotelDetailsState(var keydata, String placename, String rating, String image,
+      String location, var tripname) {
+    this.keydata = keydata;
+    this.placename = placename;
+    this.rating = rating;
+    this.image = image;
+    this.location = location;
+    this.tripname = tripname;
   }
-
   Widget starrow() {
     return Row(
       children: [
@@ -77,7 +69,7 @@ class _ListTripState extends State<ListTrip> {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return TripProfile(name);
+              return HotelProfile(keydata, tripname);
             },
           ),
         );
@@ -103,35 +95,23 @@ class _ListTripState extends State<ListTrip> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Expanded(
-                  child: Image.asset(
-                    'assets/images/lucknow_image.jpg',
-                    height: 80,
-                    width: 80,
+                  child: Image.network(
+                    image,
+                    width: 100,
+                    height: 100,
                   ),
                 ),
                 Expanded(
                     child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("$i. $name"),
+                    Text("$placename"),
+                    starrow(),
                     SizedBox(
-                      height: 5.0,
+                      height: 25.0,
                     ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(Icons.place),
-                        Text("   $tocity"),
-                      ],
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(Icons.date_range),
-                        Text("   $fromdate to \n$todate"),
-                      ],
-                    ),
+                    Text("$rating"),
+                    Text("$location"),
                   ],
                 ))
               ],

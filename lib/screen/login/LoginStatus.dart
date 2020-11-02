@@ -5,19 +5,24 @@ import 'package:flutter/material.dart';
 import '../home/Home_screen.dart';
 import 'Sign_In.dart';
 
-class LoginStatus extends StatefulWidget {
-  @override
-  _LoginStatusState createState() => _LoginStatusState();
-}
-
-class _LoginStatusState extends State<LoginStatus> {
+class LoginStatus extends StatelessWidget {
+  List<Map> hotels;
+  List<Map> restaurents;
+  List<Map> places;
+  List<Map> shops;
+  LoginStatus({this.hotels, this.restaurents, this.places, this.shops});
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<User>(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData && snapshot.data != null) {
-            return Home();
+            return Home(
+              hotels: hotels,
+              restaurents: restaurents,
+              places: places,
+              shops: shops,
+            );
           }
           return Login();
         });

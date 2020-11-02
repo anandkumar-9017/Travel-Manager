@@ -1,31 +1,45 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:travel_manager/screen/home/seemorehotel.dart';
 
-class PlaceProfile extends StatefulWidget {
+class ResProfile extends StatefulWidget {
+  var keydata;
+
+  ResProfile(var keydata) {
+    this.keydata = keydata;
+  }
   @override
-  _PlacesProfileState createState() => _PlacesProfileState();
+  _ResProfileState createState() => _ResProfileState(keydata);
 }
 
-class _PlacesProfileState extends State<PlaceProfile> {
+class _ResProfileState extends State<ResProfile> {
   var keydata;
   var tripname;
   var about;
   var location;
   var price;
+  var online;
   var name;
+  var textdispaly;
+  var orderlink;
   var rating;
   var link;
   var imagelink;
   var fromdate;
   var todate;
+  var veg;
+  var type;
   var room;
   int load = 0;
   int r = 0, done = 0;
 
-  var city;
+  _ResProfileState(var keydata) {
+    this.keydata = keydata;
+  }
+
+  var hotels;
   @override
   void initState() {
     funct();
@@ -33,16 +47,27 @@ class _PlacesProfileState extends State<PlaceProfile> {
   }
 
   void funct() async {
-    city = await FirebaseFirestore.instance
+    hotels = await FirebaseFirestore.instance
         .collection("fetch details")
         .doc("Allahabad")
+        .collection('Restaurents')
+        .doc(keydata)
         .get();
-    about = city.data()["About"];
 
-    rating = "4.5";
-    name = "Allahabad";
-    link = city.data()["link"];
-    imagelink = city.data()["imagelink"];
+    type = hotels.data()["type"];
+    online = hotels.data()["onlineorder"];
+    if (online == "true") {
+      textdispaly = "order link";
+      orderlink = hotels.data()["orderlink"];
+    } else {
+      textdispaly = "menu link";
+      orderlink = hotels.data()["menulink"];
+    }
+    location = hotels.data()["location"];
+    rating = hotels.data()["rating"];
+    name = hotels.data()["name"];
+    veg = hotels.data()["veg"];
+    imagelink = hotels.data()["imagelink"];
 
     setState(() {
       load = 1;
@@ -197,14 +222,36 @@ class _PlacesProfileState extends State<PlaceProfile> {
                   children: [
                     Padding(
                       padding: EdgeInsets.all(15.0),
-                      child: Text("About",
+                      child: Text("Online Order",
                           style: TextStyle(
                               fontSize: 20.0, fontWeight: FontWeight.w500)),
                     ),
                     Padding(
                       padding: EdgeInsets.only(
                           left: 15.0, right: 15.0, bottom: 15.0),
-                      child: Text(about),
+                      child: Text(online),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(15.0),
+                      child: Text("menu link",
+                          style: TextStyle(
+                              fontSize: 20.0, fontWeight: FontWeight.w500)),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: 15.0, right: 15.0, bottom: 15.0),
+                      child: Text(orderlink),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(15.0),
+                      child: Text("Veg",
+                          style: TextStyle(
+                              fontSize: 20.0, fontWeight: FontWeight.w500)),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: 15.0, right: 15.0, bottom: 15.0),
+                      child: Text(veg),
                     ),
                   ],
                 ),
@@ -231,14 +278,25 @@ class _PlacesProfileState extends State<PlaceProfile> {
                 children: [
                   Padding(
                     padding: EdgeInsets.all(15.0),
-                    child: Text("link",
+                    child: Text("Type",
                         style: TextStyle(
                             fontSize: 20.0, fontWeight: FontWeight.w500)),
                   ),
                   Padding(
                     padding:
                         EdgeInsets.only(left: 15.0, right: 15.0, bottom: 15.0),
-                    child: Text(link),
+                    child: Text(type),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(15.0),
+                    child: Text("Location",
+                        style: TextStyle(
+                            fontSize: 20.0, fontWeight: FontWeight.w500)),
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsets.only(left: 15.0, right: 15.0, bottom: 15.0),
+                    child: Text(location),
                   ),
                 ],
               ),

@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:travel_manager/screen/bootom_nav.dart';
 import 'package:travel_manager/screen/profile/Profile_screen.dart';
@@ -8,9 +10,41 @@ class ProfileEdit extends StatefulWidget {
 }
 
 class _ProfileEditState extends State<ProfileEdit> {
+  TextEditingController namecontroller = TextEditingController(text: "");
+  TextEditingController emailcontroller = TextEditingController(text: "");
+  TextEditingController phonecontroller = TextEditingController(text: "");
+  TextEditingController address = TextEditingController(text: "");
+  void firebaseset() async {
+    print("aa gaya");
+
+    var firebaseUser = FirebaseAuth.instance.currentUser;
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(firebaseUser.uid)
+        .set({
+      "check": "kuchh",
+      "name": namecontroller.text,
+      "phone": phonecontroller.text,
+      "email": emailcontroller.text,
+      "address": address.text,
+    }).then((_) {
+      print("likh gaya");
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return Profile();
+          },
+        ),
+      );
+    });
+  }
+
   Widget profileDetail(
     Widget icon,
     String heading,
+    TextEditingController controllerv,
   ) {
     return Padding(
       padding: EdgeInsets.only(top: 10.0, left: 25.0, right: 25.0),
@@ -23,6 +57,7 @@ class _ProfileEditState extends State<ProfileEdit> {
             children: [
               Expanded(
                 child: TextField(
+                  controller: controllerv,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.red),
@@ -65,18 +100,15 @@ class _ProfileEditState extends State<ProfileEdit> {
                 profileDetail(
                   Icon(Icons.person),
                   "Name",
+                  namecontroller,
                 ),
+                profileDetail(Icon(Icons.email), "Email Id", emailcontroller),
                 profileDetail(
-                  Icon(Icons.email),
-                  "Email Id",
-                ),
-                profileDetail(
-                  Icon(Icons.phone),
-                  "Phone Number",
-                ),
+                    Icon(Icons.phone), "Phone Number", phonecontroller),
                 profileDetail(
                   Icon(Icons.home),
                   "Address",
+                  address,
                 ),
               ],
             ),
@@ -90,14 +122,7 @@ class _ProfileEditState extends State<ProfileEdit> {
           color: Colors.white,
         ),
         onPressed: () {
-          Navigator.pop(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return Profile();
-              },
-            ),
-          );
+          firebaseset();
         },
       ),
     );

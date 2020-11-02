@@ -1,18 +1,53 @@
 import 'package:flutter/material.dart';
 import 'package:travel_manager/screen/Trip/editableDetails.dart';
+import 'package:travel_manager/screen/Trip/hotels/hotelprofile.dart';
+import 'package:travel_manager/screen/Trip/hotels/seehotels.dart';
 
 class TransportList extends StatefulWidget {
   var i;
-  TransportList({this.i});
+  var name;
+  var date;
+  var time;
+  var route;
+  var price;
+  var tripname;
+  var keydata;
+  TransportList(
+      {this.i,
+      this.name,
+      this.date,
+      this.route,
+      this.price,
+      this.time,
+      this.keydata,
+      this.tripname});
 
   @override
-  _TransportListState createState() => _TransportListState(i);
+  _TransportListState createState() =>
+      _TransportListState(i, name, date, route, price, time, keydata, tripname);
 }
 
 class _TransportListState extends State<TransportList> {
   var i;
-  _TransportListState(var i) {
+  var name;
+  var date;
+  var time;
+  var route;
+  var price;
+  var tripname;
+  var keydata;
+  List<String> detailtransfer = List();
+  List<Icon> icontransfer = List();
+  _TransportListState(var i, var name, var date, var route, var price, var time,
+      var keydata, var tripname) {
     this.i = i;
+    this.name = name;
+    this.date = date;
+    this.route = route;
+    this.price = price;
+    this.time = time;
+    this.keydata = keydata;
+    this.tripname = tripname;
   }
 
   Widget details(Widget icon, String text) {
@@ -32,23 +67,14 @@ class _TransportListState extends State<TransportList> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> detailtransfer = <String>[
-      '25-Oct 2020 16:30',
-      'indigo Airbus-250',
-      'Termianl 2, Delhi',
-    ];
-    List<Icon> icontransfer = <Icon>[
-      Icon(Icons.date_range),
-      Icon(Icons.flight_land),
-      Icon(Icons.airport_shuttle)
-    ];
     return GestureDetector(
       onTap: () {
+        print(keydata);
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) {
-              return EditableDetails(detailtransfer, icontransfer);
+              return HotelProfile(keydata, tripname);
             },
           ),
         );
@@ -78,7 +104,7 @@ class _TransportListState extends State<TransportList> {
                     child: Padding(
                       padding:
                           EdgeInsets.only(top: 8.0, bottom: 8.0, left: 8.0),
-                      child: Text("Flights"),
+                      child: Text(name),
                     ),
                   ),
                 ),
@@ -87,10 +113,10 @@ class _TransportListState extends State<TransportList> {
                   child: Container(
                     child: Column(
                       children: [
-                        details(Icon(Icons.date_range), "25-Oct 2020 16:30"),
-                        details(Icon(Icons.flight_land), "indigo Airbus-250"),
-                        details(
-                            Icon(Icons.airport_shuttle), "Termianl 2, Delhi"),
+                        details(Icon(Icons.date_range), date),
+                        details(Icon(Icons.time_to_leave), time),
+                        details(Icon(Icons.add_road), route),
+                        details(Icon(Icons.money), price),
                       ],
                     ),
                   ),
